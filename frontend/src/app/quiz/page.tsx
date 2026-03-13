@@ -37,6 +37,22 @@ export default function QuizList() {
         <p className="text-xl text-gray-400">
           Learn Test-Driven Development through interactive quizzes
         </p>
+        
+        {/* Navigation */}
+        <nav className="flex gap-4 mt-6">
+          <Link
+            href="/quiz"
+            className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500"
+          >
+            📝 Quizzes
+          </Link>
+          <Link
+            href="/lab"
+            className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-gray-600"
+          >
+            🧪 TDD Lab
+          </Link>
+        </nav>
       </header>
 
       <main className="max-w-4xl mx-auto">
