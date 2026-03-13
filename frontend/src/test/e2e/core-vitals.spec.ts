@@ -8,26 +8,30 @@ import { test, expect } from "@playwright/test";
  */
 
 test.describe("Core Vitals", () => {
-  test("Home page loads successfully", async ({ page }) => {
+  test("Home page loads and redirects to quiz list", async ({ page }) => {
     await page.goto("/");
     
-    // Verify page loads without crash
+    // Verify page loads and redirects to /quiz
+    await expect(page).toHaveURL(/\/quiz/);
     await expect(page).toHaveTitle(/TDD Mastery/i);
   });
 
-  test("Hello TDD heading is visible", async ({ page }) => {
-    await page.goto("/");
+  test("Quiz list displays available modules", async ({ page }) => {
+    await page.goto("/quiz");
     
-    // Verify the main heading is visible
-    const heading = page.getByRole("heading", { name: /hello tdd/i });
+    // Verify quiz list heading is visible
+    const heading = page.getByRole("heading", { name: /available modules/i });
     await expect(heading).toBeVisible();
   });
 
-  test("Welcome message is visible", async ({ page }) => {
-    await page.goto("/");
+  test("Can navigate to a quiz", async ({ page }) => {
+    await page.goto("/quiz");
     
-    // Verify welcome message
-    const message = page.getByText(/Welcome to TDD Mastery Platform/i);
-    await expect(message).toBeVisible();
+    // Click on the first quiz
+    await page.getByText("TDD Fundamentals").click();
+    
+    // Verify we're on a quiz page
+    await expect(page).toHaveURL(/\/quiz\/tdd-basics-001/);
+    await expect(page.getByText("Question 1", { exact: true })).toBeVisible();
   });
 });

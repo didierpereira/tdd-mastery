@@ -1,5 +1,5 @@
-import { HelloTDD } from "@/components/atoms/HelloTDD";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <HelloTDD />;
+  redirect("/quiz");
 }
